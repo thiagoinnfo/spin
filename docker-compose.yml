@@ -1,7 +1,7 @@
 version: "3"
 services:
 
-  rulette-web:
+  web:
     image: node:10.16-slim
     ports:
       - "${PORT}:${PORT}"
@@ -12,7 +12,7 @@ services:
       - ./:/home/node/app
     command: "npm start"
 
-  rulette-mysql:
+  mysql:
     image: mysql:5.7
     ports:
       - '${DB_PORT}:${DB_PORT}'
@@ -27,7 +27,7 @@ services:
     networks:
       - backend 
   
-  rulette-mongo:
+  mongo:
     image: mongo
     restart: "always"
     environment:
