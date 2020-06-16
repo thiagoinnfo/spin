@@ -1,0 +1,46 @@
+version: "3"
+services:
+
+  rulette-web:
+    image: node:10.16-slim
+    ports:
+      - "${PORT}:${PORT}"
+    networks:
+      - backend  
+    working_dir: "/home/node/app"
+    volumes:
+      - ./:/home/node/app
+    command: "npm start"
+
+  rulette-mysql:
+    image: mysql:5.7
+    ports:
+      - '${DB_PORT}:${DB_PORT}'
+    volumes:
+      - "./docker/mysql/data:/var/lib/mysql"
+    environment:
+      MYSQL_USER: ${DB_USER}
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ALLOW_EMPTY_PASSWORD: ${DB_ALLOW_EMPTY_PASSWORD}
+
+    networks:
+      - backend 
+  
+  rulette-mongo:
+    image: mongo
+    restart: "always"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD}
+    volumes:
+      - ./docker/mongo/data:/data/db
+    ports:
+      - "${MONGO_PORT}:${MONGO_PORT}"
+    networks:
+      - backend    
+
+
+networks:
+  backend:
+    driver: "bridge"
