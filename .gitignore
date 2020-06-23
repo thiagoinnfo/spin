@@ -3,7 +3,8 @@ node_modules
 package-lock.json
 
 #Docker
-docker
+docker/mongo/*
+docker/mysql/*
 
 # Adonis directory for storing tmp files
 tmp
