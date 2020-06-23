@@ -2,12 +2,14 @@ version: "3"
 services:
 
   web:
-    image: node:10.16-slim
+    build:
+      context: .
+      dockerfile: ./docker/node/Dockerfile
     ports:
       - "${PORT}:${PORT}"
     networks:
       - backend  
-    working_dir: "/home/node/app"
+    user: $USERID:$USERID
     volumes:
       - ./:/home/node/app
     command: "npm start"
