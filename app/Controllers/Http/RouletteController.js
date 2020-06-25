@@ -2,8 +2,9 @@
 
 class RouletteController {
 
-    async show({ id, request, response }){
-        console.log('aaaaaaaaaa');
+    async show({view}){
+    
+       return view.render('roulettes.show')
     }
 }
 

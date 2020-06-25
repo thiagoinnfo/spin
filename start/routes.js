@@ -22,4 +22,4 @@ Route.on('/').render('welcome')
 /**
  * Routes roulette
  */
-Route.get('roulettes', 'RouletteController.show')
+Route.get('/roulettes', 'RouletteController.show')
